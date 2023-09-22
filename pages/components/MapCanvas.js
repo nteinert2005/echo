@@ -14,14 +14,14 @@ const MapCanvas = ({ map }) => {
 
         var newMap = new Image();
         newMap.onload = () => {
-            context.drawImage(newMap, 0, 0, newMap.width * 2.25, newMap.height * 2.25)
+            context.drawImage(newMap, 0, 0, newMap.width * 2, newMap.height * 2)
         };
 
         newMap.src = map; 
     }, []);
 
     return(
-            <canvas ref={canvasRef} style={{ left: '10%', position: 'absolute'}}></canvas>
+            <canvas ref={canvasRef} style={{ left: '15%', position: 'absolute'}}></canvas>
           
     )
 }

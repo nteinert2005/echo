@@ -1,69 +1,90 @@
 import { useEffect, useRef, useState } from "react";
 import DataDrawer from "./DataDrawer";
-import { useDisclosure } from "@chakra-ui/react";
+import { filter, useDisclosure } from "@chakra-ui/react";
 
-const DataLayer = ({ data}) => {
+const DataLayer = ({ data, filterData }) => {
     const canvasRef = useRef();
 
     const { isOpen, onClose, onOpen } = useDisclosure();
     const [ singleData, setSingleData ] = useState();
 
     useEffect(() => {
+
+        console.log(data);
         var canvas = canvasRef.current;
-        var context = canvas.getContext('2d');
 
 
         canvas.height = 900;
         canvas.width = 1600;
 
-        data.items.map((item) => {
+        data.map((item) => {
             if(item.location === "FountainAve"){
-                context.beginPath();
-                context.arc(item.exactLocation.x,item.exactLocation.y,10,0,2 * Math.PI);
-                
                 switch (item.type) {
-                    case 'computer':
-                    case "monitor":
-                    case "terminal":
-                        context.fillStyle = "#BB86FC";
-                        context.fill();
-                        context.strokeStyle = "#BB86FC";
-                        context.stroke();
+                    case 'computers':
+                    case "monitors":
+                    case "terminals":
+                        drawDataPoint(item.exactLocation.x, item.exactLocation.y, 'red')
                         break;
                     
                     case 'tv':
                     case "apple-tv":
-                        context.fillStyle = "#3700B6";
-                        context.fill();
-                        context.strokeStyle = "#3700B6";
-                        context.stroke();
+                        drawDataPoint(item.exactLocation.x, item.exactLocation.y, 'blue')
                         break;
 
-                    case 'scanner':
-                        context.fillStyle = "#01DBC6";
-                        context.fill();
-                        context.strokeStyle = "#01DBC6";
-                        context.stroke();
+                    case 'scanners':
+                        drawDataPoint(item.exactLocation.x, item.exactLocation.y, 'green')
                         break;
 
                     default: 
-                        context.fillStyle = 'gray';
-                        context.fill();
-                        context.strokeStyle = 'gray';
-                        context.stroke();
+                        drawDataPoint(item.exactLocation.x, item.exactLocation.y, 'black')
+                        break;
                 }
             }
         })        
     }, []);
 
+    useEffect(() => {
+        if(filterData !== "all"){
+        console.log(filterData);
+
+        data.map((item) => {
+            if(item.location === "FountainAve"){                
+                if(item.type === filterData){
+                    drawDataPoint(item.exactLocation.x, item.exactLocation.y, 'green')
+                } else {
+                    drawDataPoint(item.exactLocation.x, item.exactLocation.y, 'gray')
+                }
+            }
+        }) 
+        }
+    }, [filterData])
+
 
     function checkClickLocation(x,y){
-        data.items.forEach(element => {
+        data.forEach(element => {
             if(Math.pow(x-element.exactLocation.x, 2) + Math.pow(y-element.exactLocation.y, 2) < Math.pow(10, 2)){
                 setSingleData(element);
                 onOpen();
             }
         });
+
+
+        var test = data.some((element) => Math.pow(x-element.exactLocation.x, 2) + Math.pow(y-element.exactLocation.y, 2) < Math.pow(10, 2) )
+        
+        if(test === false){
+            drawDataPoint(x,y, 'gray');
+        }
+    }
+
+    function drawDataPoint(x,y, color){
+        var canvas = canvasRef.current;
+        var context = canvas.getContext('2d');
+        context.beginPath();
+        context.arc(x,y,10,0,2 * Math.PI);
+        context.fillStyle = color;
+        context.strokeStyle = color;
+        context.stroke();
+        context.fill();
     }
 
     useEffect(() => {

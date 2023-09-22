@@ -13,10 +13,7 @@ import {
   } from '@chakra-ui/react'
 
 const DataDrawer = ({ data, isOpen, onOpen, onClose  }) => {
-    console.log(data);
-
-
-    return (
+      return (
         <>
           <Drawer
             isOpen={isOpen}

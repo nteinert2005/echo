@@ -2,25 +2,25 @@
     "items": [
         {
             "id": 1,
-            "type": "monitor",
+            "type": "monitors",
             "UID": "0020349842",
             "location": "FountainAve",
             "exactLocation": {
-                "x": 210,
+                "x": 410,
                 "y": 310
             }
         }, {
             "id": 2,
-            "type": "computer",
+            "type": "computers",
             "UID": "KMC0001",
             "location": "FountainAve",
             "exactLocation": {
-                "x": 200,
-                "y": 300
+                "x": 420,
+                "y": 310
             }
         }, {
             "id": 4, 
-            "type": "terminal",
+            "type": "terminals",
             "UID": "0001",
             "location": "FountainAve",
             "exactLocation": {
@@ -47,7 +47,7 @@
             }
         }, {
             "id": 7,
-            "type": "scanner",
+            "type": "scanners",
             "location": "FountainAve",
             "exactLocation": {
                 "x": 800,
@@ -55,7 +55,7 @@
             }
         }, {
             "id": 3,
-            "type": "computer",
+            "type": "computers",
             "UID": "KMC0002",
             "location": "StoneCity",
             "exactLocation": {
