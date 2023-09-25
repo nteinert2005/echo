@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import DataDrawer from "./DataDrawer";
 import { filter, useDisclosure } from "@chakra-ui/react";
+import axios from "axios";
 
 const DataLayer = ({ data, filterData }) => {
     const canvasRef = useRef();
@@ -15,7 +16,7 @@ const DataLayer = ({ data, filterData }) => {
 
 
         canvas.height = 900;
-        canvas.width = 1600;
+        canvas.width = 1000;
 
         data.map((item) => {
             if(item.location === "FountainAve"){
@@ -59,6 +60,19 @@ const DataLayer = ({ data, filterData }) => {
         }
     }, [filterData])
 
+    async function createNewPoint(x, y){
+        const createNode = await axios({
+            method: 'post',
+            url: '/api/inventory/new',
+            data: {
+                type: "",
+                x: x,
+                y: y,
+            }
+        });
+        return createNode;
+    }
+
 
     function checkClickLocation(x,y){
         data.forEach(element => {
@@ -72,7 +86,9 @@ const DataLayer = ({ data, filterData }) => {
         var test = data.some((element) => Math.pow(x-element.exactLocation.x, 2) + Math.pow(y-element.exactLocation.y, 2) < Math.pow(10, 2) )
         
         if(test === false){
-            drawDataPoint(x,y, 'gray');
+            createNewPoint(x,y).then((data) => {
+                drawDataPoint(x, y, 'gray');
+            })
         }
     }
 

@@ -9,19 +9,19 @@ const MapCanvas = ({ map }) => {
         var context = canvas.getContext('2d');
 
 
-        canvas.height = 900;
-        canvas.width = 1600;
+        canvas.height = 750;
+        canvas.width = 1250;
 
         var newMap = new Image();
         newMap.onload = () => {
-            context.drawImage(newMap, 0, 0, newMap.width * 2, newMap.height * 2)
+            context.drawImage(newMap, 0, 0, newMap.width * 1.75, newMap.height * 1.75)
         };
 
         newMap.src = map; 
     }, []);
 
     return(
-            <canvas ref={canvasRef} style={{ left: '15%', position: 'absolute'}}></canvas>
+            <canvas ref={canvasRef} style={{ left: '18%', position: 'absolute', top: '10%'}}></canvas>
           
     )
 }

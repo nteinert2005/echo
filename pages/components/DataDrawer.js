@@ -10,9 +10,50 @@ import {
     FormControl,
     FormLabel,
     DrawerCloseButton,
+    Select,
   } from '@chakra-ui/react'
 
 const DataDrawer = ({ data, isOpen, onOpen, onClose  }) => {
+      const typeOptions = [ { 
+        id: "Computers",
+        key: "computers",
+        count: 0,
+    }, {
+        id: "Monitors",
+        key: "monitors",
+        count: 0
+    }, {
+        id: "Apple TV",
+        key: "apple-tv",
+        count: 0
+    }, {
+        id: "Chromecast",
+        key: "chromecast",
+        count: 0
+    }, {
+        id: "Switches",
+        key: "switches",
+        count: 0
+    }, {
+        id: "Routers",
+        key: "routers",
+        count: 0
+    }, {
+        id: "Terminals",
+        key: "terminals",
+        count: 0
+    }, {
+        id: "Scanners",
+        key: "scanners",
+        count: 0
+    }, {
+        id: "Unknown",
+        key: "",
+        count: 0,
+    }]
+
+
+
       return (
         <>
           <Drawer
@@ -23,20 +64,25 @@ const DataDrawer = ({ data, isOpen, onOpen, onClose  }) => {
             <DrawerOverlay />
             <DrawerContent>
               <DrawerCloseButton />
-              <DrawerHeader>Create your account</DrawerHeader>
+              <DrawerHeader>Edit Inventory Item</DrawerHeader>
     
               { data !== undefined && 
               <DrawerBody>
-                <FormControl>
+                <FormControl mb="1em">
                     <FormLabel htmlFor='email'>Item Type:</FormLabel>
-                    <Input readOnly id='email' value={data.type} type='text' />
+                    <Select>
+                      { typeOptions.map((option) => (
+                        <option value={option.key}> { option.id} </option>
+                      ))}
+                    </Select>
+                    {/* <Input readOnly id='email' value={data.type} type='text' /> */}
                 </FormControl>
-                <FormControl>
+                <FormControl mb="1em">
                     <FormLabel htmlFor='email'>Location:</FormLabel>
                     <Input readOnly id='email' value={data.location} type='text' />
 
                 </FormControl>
-                <FormControl>
+                <FormControl mb="1em">
                     <FormLabel htmlFor='email'>UID</FormLabel>
                     <Input readOnly id='email' value={data.UID} type='text' />
 

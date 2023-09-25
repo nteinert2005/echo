@@ -31,14 +31,14 @@ const IndexPage = ({ isConnected }) => {
     }, []);
 
     return(
-        <>
+        <div style={{ background: "#0E0E11", overflow: "hidden", color: 'white', height: '100vh'}}>
         <Header /> 
         <Flex margin="0 auto" height="100%" style={{ marginTop: "-20px"}} width="100%">
-            <FilterBy setFilterData={setFilterData} filterData={filterData} /> 
+            <FilterBy data={data} setFilterData={setFilterData} filterData={filterData} /> 
             <MapCanvas map={'images/bg.jpg'} />     
             { data !== null && <DataLayer data={data} filterData={filterData} />  }
         </Flex>
-        </>
+        </div>
     )
 }
 
