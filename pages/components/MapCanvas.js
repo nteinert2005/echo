@@ -9,7 +9,7 @@ const MapCanvas = ({ map }) => {
         var context = canvas.getContext('2d');
 
 
-        canvas.height = 750;
+        canvas.height = 700;
         canvas.width = 1250;
 
         var newMap = new Image();
@@ -21,7 +21,7 @@ const MapCanvas = ({ map }) => {
     }, []);
 
     return(
-            <canvas ref={canvasRef} style={{ left: '18%', position: 'absolute', top: '10%'}}></canvas>
+            <canvas ref={canvasRef} style={{ left: '18%', position: 'absolute', top: '20%'}}></canvas>
           
     )
 }

@@ -15,8 +15,8 @@ const DataLayer = ({ data, filterData }) => {
         var canvas = canvasRef.current;
 
 
-        canvas.height = 900;
-        canvas.width = 1000;
+        canvas.height = 700;
+        canvas.width = 1250;
 
         data.map((item) => {
             if(item.location === "FountainAve"){
@@ -116,7 +116,7 @@ const DataLayer = ({ data, filterData }) => {
 
     return(
         <>
-        <canvas id="dataCanvas" ref={canvasRef} style={{ left: '10%', position: 'absolute'}}></canvas>
+        <canvas id="dataCanvas" ref={canvasRef} style={{ left: '10%', top: "20%", position: 'absolute'}}></canvas>
         <DataDrawer data={singleData} isOpen={isOpen} onOpen={onOpen} onClose={onClose} /> 
         </> 
     )   

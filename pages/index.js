@@ -11,6 +11,8 @@ import FilterBy from "./components/FilterBy";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import Navbar from "./components/Navbar.new";
+import Categories from "./components/Category.new";
 
 
 
@@ -24,21 +26,28 @@ const IndexPage = ({ isConnected }) => {
     }
 
 
-    useEffect(async () => {
+    useEffect(() => {
        fetchData().then((dbData) => {
         setData(dbData);
        })
     }, []);
 
     return(
-        <div style={{ background: "#0E0E11", overflow: "hidden", color: 'white', height: '100vh'}}>
-        <Header /> 
-        <Flex margin="0 auto" height="100%" style={{ marginTop: "-20px"}} width="100%">
-            <FilterBy data={data} setFilterData={setFilterData} filterData={filterData} /> 
-            <MapCanvas map={'images/bg.jpg'} />     
-            { data !== null && <DataLayer data={data} filterData={filterData} />  }
-        </Flex>
-        </div>
+        // <div style={{ background: "#0E0E11", overflow: "hidden", color: 'white', height: '100vh'}}>
+        // <Header /> 
+        // <Flex margin="0 auto" height="100%" style={{ marginTop: "-20px"}} width="100%">
+        //     <FilterBy data={data} setFilterData={setFilterData} filterData={filterData} /> 
+        //     <MapCanvas map={'images/bg.jpg'} />     
+        //     { data !== null && <DataLayer data={data} filterData={filterData} />  }
+        // </Flex>
+        // </div>
+
+        <Flex flexDir='column' background="#0E0E11" height="100vh">
+            <Navbar />
+            <Categories /> 
+            <MapCanvas map={'/images/bg.jpg'} /> 
+            { data !== null && <DataLayer data={data} filterData={filterData} /> }
+        </Flex> 
     )
 }
 
