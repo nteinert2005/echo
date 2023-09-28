@@ -22,11 +22,17 @@ const IndexPage = ({ isConnected }) => {
 
     const [filterData, setFilterData] = useState("all");
     const [ data, setData ] = useState(null);
+    const [ isChildShow, setShowChild ] = useState(false);
 
     const fetchData = async() => {
         const res = await axios.get('/api/inventory/all');
         return res.data;
     }
+
+
+    useEffect(() => {
+        setShowChild(true);
+    }, []);
 
 
     useEffect(() => {
@@ -48,7 +54,7 @@ const IndexPage = ({ isConnected }) => {
         <Flex flexDir='column' background="#0E0E11" height="100vh">
             <Navbar />
             <Categories /> 
-            <MapView /> 
+            { isChildShow && <MapView /> }
             {/* <MapCanvas map={'/images/SCPlant1.jpg'} /> 
             { data !== null && <DataLayer data={data} filterData={filterData} /> } */}
         </Flex> 
