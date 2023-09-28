@@ -18,6 +18,8 @@ const MapLayer = () => {
 
 
     return(
+        <>
+        { typeof window !== 'undefined' && 
         <MapContainer center={[0,0]} zoom={2} scrollWheelZoom={false}>
             <TileLayer  attribution="its offline" url={'../images/SCPlant/{z}/{x}/{y}.png'} />
 
@@ -28,6 +30,8 @@ const MapLayer = () => {
             </Marker>
             <LocationFinderDummy /> 
         </MapContainer>
+        }
+    </>
     )
 }
 
