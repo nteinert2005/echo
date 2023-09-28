@@ -10,18 +10,18 @@ const MapCanvas = ({ map }) => {
 
 
         canvas.height = 700;
-        canvas.width = 1250;
+        canvas.width = 1800;
 
         var newMap = new Image();
         newMap.onload = () => {
-            context.drawImage(newMap, 0, 0, newMap.width * 1.75, newMap.height * 1.75)
+            context.drawImage(newMap, 0, 0, newMap.width * 1.7, newMap.height * 1.25)
         };
 
         newMap.src = map; 
     }, []);
 
     return(
-            <canvas ref={canvasRef} style={{ left: '18%', position: 'absolute', top: '20%'}}></canvas>
+            <canvas ref={canvasRef} style={{ left: '5%', position: 'absolute', top: '20%'}}></canvas>
           
     )
 }

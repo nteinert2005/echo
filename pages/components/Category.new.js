@@ -6,28 +6,36 @@ import { useState } from "react";
 export const categories = [
     {
         label: "Routers",
-        icon: RouterIcon 
+        icon: RouterIcon,
+        color: "#3b3734"
     }, {
         label: "Computers",
-        icon: LinkIcon
+        icon: LinkIcon,
+        color: "#e60049"
     }, {
         label: "Monitors",
-        icon: SpinnerIcon
+        icon: SpinnerIcon,
+        color: "#0bb4ff"
     }, {
         label: "Apple TV",
-        icon: SunIcon
+        icon: SunIcon, 
+        color: "#9b19f5"
     }, {
         label: "Chrome",
-        icon: SunIcon
+        icon: SunIcon,
+        color: "#e6d800"
     }, {
         label: "Switches",
-        icon: SunIcon
+        icon: SunIcon,
+        color: ""
     }, {
         label: "Terminals",
-        icon: SunIcon
+        icon: SunIcon,
+        color: "#50e991"
     }, {
         label: "Scanners",
-        icon: SunIcon
+        icon: SunIcon,
+        color: "#ffa300"
     }
 ]
 
@@ -40,9 +48,9 @@ const Categories = () => {
 
 
     return(
-            <Flex width="80%" margin="0 auto" pt={4} alignItems={'center'} justifyContent={'space-between'} overflowX={'auto'}>
+            <Flex width="80%" margin="0 auto" pt={4} mb={'2em'} alignItems={'center'} justifyContent={'space-between'}>
                 { categories.map((item, key) => (
-                    <Flex backgroundColor={activeFilter === key ? 'red': "none"} borderRadius={'40px'} onClick={() => setSelectedFiilter(key)} flexDir={'column'} color="white" p={3} alignItems={'center'} textAlign={'center'}>
+                    <Flex backgroundColor={activeFilter === key ? item.color : "none"} borderRadius={'40px'} onClick={() => setSelectedFiilter(key)} flexDir={'column'} color="white" p={3} alignItems={'center'} textAlign={'center'}>
                         <Icon as={item.icon} fontSize={'26px'} /> 
                         <Text marginTop={3} fontWeight={'medium'} fontSize={'sm'}> { item.label} </Text>
                     </Flex>

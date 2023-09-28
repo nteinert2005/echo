@@ -16,28 +16,38 @@ const DataLayer = ({ data, filterData }) => {
 
 
         canvas.height = 700;
-        canvas.width = 1250;
+        canvas.width = 1800;
 
         data.map((item) => {
             if(item.location === "FountainAve"){
                 switch (item.type) {
                     case 'computers':
+                        drawDataPoint(item.exactLocation.x, item.exactLocation.y, '#e60049');
+                        break;
                     case "monitors":
+                        drawDataPoint(item.exactLocation.x, item.exactLocation.y, '#0bb4ff');
+                        break;
                     case "terminals":
-                        drawDataPoint(item.exactLocation.x, item.exactLocation.y, 'red')
+                        drawDataPoint(item.exactLocation.x, item.exactLocation.y, '#50e991')
                         break;
                     
                     case 'tv':
+                        drawDataPoint(item.exactLocation.x, item.exactLocation.y, '#e6d800');
+                        break;
                     case "apple-tv":
-                        drawDataPoint(item.exactLocation.x, item.exactLocation.y, 'blue')
+                        drawDataPoint(item.exactLocation.x, item.exactLocation.y, '#9b19f5')
                         break;
 
                     case 'scanners':
-                        drawDataPoint(item.exactLocation.x, item.exactLocation.y, 'green')
+                        drawDataPoint(item.exactLocation.x, item.exactLocation.y, '#ffa300')
+                        break;
+
+                    case 'routers':
+                        drawDataPoint(item.exactLocation.x, item.exactLocation.y, '#3b3734')
                         break;
 
                     default: 
-                        drawDataPoint(item.exactLocation.x, item.exactLocation.y, 'black')
+                        drawDataPoint(item.exactLocation.x, item.exactLocation.y, 'gray');
                         break;
                 }
             }
@@ -116,7 +126,7 @@ const DataLayer = ({ data, filterData }) => {
 
     return(
         <>
-        <canvas id="dataCanvas" ref={canvasRef} style={{ left: '10%', top: "20%", position: 'absolute'}}></canvas>
+        <canvas id="dataCanvas" ref={canvasRef} style={{ left: '5%', top: "20%", position: 'absolute'}}></canvas>
         <DataDrawer data={singleData} isOpen={isOpen} onOpen={onOpen} onClose={onClose} /> 
         </> 
     )   

@@ -1,1 +1,8 @@
-{}
+{
+  "index.js -> ./components/Map.new": {
+    "id": "index.js -> ./components/Map.new",
+    "files": [
+      "static/chunks/pages_components_Map_new_js.js"
+    ]
+  }
+}
