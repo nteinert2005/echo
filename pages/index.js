@@ -13,11 +13,14 @@ import { useEffect } from "react";
 import axios from "axios";
 import Navbar from "./components/Navbar.new";
 import Categories from "./components/Category.new"
-
-import MapLayer from "./components/Map.new";
+import dynamic from "next/dynamic";
 
 const IndexPage = ({ isConnected }) => {
-    
+
+    const MapLayer = dynamic(() => import('../components/Map.new'), {
+        ssr: false
+    })
+
     const [filterData, setFilterData] = useState("all");
     const [ data, setData ] = useState(null);
     
@@ -43,7 +46,8 @@ const IndexPage = ({ isConnected }) => {
         //     { data !== null && <DataLayer data={data} filterData={filterData} />  }
         // </Flex>
         // </div>
-
+        <>
+        
         <Flex flexDir='column' background="#0E0E11" height="100vh">
             <Navbar />
             <Categories /> 
@@ -51,6 +55,7 @@ const IndexPage = ({ isConnected }) => {
             {/* <MapCanvas map={'/images/SCPlant1.jpg'} /> 
             { data !== null && <DataLayer data={data} filterData={filterData} /> } */}
         </Flex> 
+        </>
     )
 }
 
