@@ -3,7 +3,7 @@ import { TileLayer } from "react-leaflet";
 import { useMap } from "react-leaflet";
 
 
-const LocationFinderDummy = () => {
+export const LocationFinderDummy = () => {
     const map = useMapEvents({
         click(e) {
             console.log(e)
