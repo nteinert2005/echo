@@ -1,6 +1,6 @@
 import { LinkIcon, MoonIcon, SpinnerIcon, SunIcon } from "@chakra-ui/icons";
 import { Container, Flex, Icon, Text } from "@chakra-ui/react"
-import { RouterIcon } from "./icons";
+import { RouterIcon } from "./icons/Router";
 import { useState } from "react";
 
 export const categories = [
