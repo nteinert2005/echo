@@ -1,40 +1,13 @@
-import { Text } from "@chakra-ui/react";
+import { Button, Text, useDisclosure } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { MapContainer, Marker, Popup, useMapEvents } from "react-leaflet";
 import { TileLayer } from "react-leaflet";
 import { useMap } from "react-leaflet";
 import { Map } from "react-leaflet-universal";
-
-export const LocationFinderDummy = ({ setIsRefreshing }) => {
-  async function createNewPoint(x, y) {
-    const query = await axios({
-      method: "POST",
-      url: "/api/inventory/new",
-      data: {
-        type: "",
-        x: x,
-        y: y,
-      },
-    });
-
-    return query.data;
-  }
-
-  const map = useMapEvents({
-    click(e) {
-      createNewPoint(e.latlng.lat, e.latlng.lng).then((data) => {
-        if (
-          confirm("Data was been updated. Do you want to refresh now?") === true
-        ) {
-          location.reload();
-        }
-      });
-    },
-  });
-
-  return null;
-};
+import EditModal from "./EditModal";
+import LocationFinderDummy from "./LocationFinderDummy";
+import DeleteModal from "./DeleteModal";
 
 const MapLayer = () => {
   const position = [41.131, 13.31];
@@ -42,6 +15,19 @@ const MapLayer = () => {
   const mapRef = useRef();
   const [dataPoints, setDataPoints] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(true);
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const {
+    isOpen: isEditOpen,
+    onOpen: onEditOpen,
+    onClose: onEditClose,
+  } = useDisclosure();
+
+  const {
+    isOpen: isDeleteOpen,
+    onOpen: onDeleteOpen,
+    onClose: onDeleteClose,
+  } = useDisclosure();
 
   useEffect(() => {
     setIsReady(true);
@@ -67,6 +53,10 @@ const MapLayer = () => {
     });
   }, []);
 
+  useEffect(() => {
+    console.log(selectedItem);
+  }, [selectedItem]);
+
   return (
     isReady && (
       <>
@@ -79,14 +69,55 @@ const MapLayer = () => {
 
           {dataPoints !== null &&
             dataPoints.map((point, key) => (
-              <Marker key={key} position={point.latLong}>
+              <Marker
+                style={{ background: "red" }}
+                key={key}
+                position={point.latLong}
+              >
                 <Popup>
                   <Text>Type: {point.type}</Text>
                   <Text>UID: {point.uid}</Text>
+                  <Button
+                    onClick={() => {
+                      setSelectedItem(point);
+                      onEditOpen();
+                    }}
+                    mr="1"
+                    bgColor={"#3B3734"}
+                    textColor={"white"}
+                  >
+                    {" "}
+                    Edit{" "}
+                  </Button>
+                  <Button
+                    ml="1"
+                    bgColor={"#E60049"}
+                    textColor={"white"}
+                    onClick={() => {
+                      setSelectedItem(point);
+                      onDeleteOpen();
+                    }}
+                  >
+                    {" "}
+                    Delete{" "}
+                  </Button>
                 </Popup>
               </Marker>
             ))}
           <LocationFinderDummy setIsRefreshing={setIsRefreshing} />
+          <EditModal
+            isOpen={isEditOpen}
+            onClose={onEditClose}
+            onOpen={onEditOpen}
+            selectedItem={selectedItem}
+            setSelectedItem={setSelectedItem}
+          />
+          <DeleteModal
+            isOpen={isDeleteOpen}
+            onClose={onDeleteClose}
+            onOpen={onDeleteOpen}
+            selectedItem={selectedItem}
+          />
         </MapContainer>
       </>
     )

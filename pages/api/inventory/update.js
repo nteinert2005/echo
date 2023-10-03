@@ -1,36 +1,39 @@
-import clientPromise from "../../../lib/mongodb"
+import clientPromise from '../../../lib/mongodb';
 
 var ObjectId = require('mongodb').ObjectId;
 
-export default async function handler(req, res){
-    try {
-        const client = await clientPromise;
+export default async function handler(req, res) {
+  try {
+    const client = await clientPromise;
 
-        const db = client.db('EchoInventory');
+    const db = client.db('EchoInventory');
 
-        const body = req.body;
+    const body = req.body.data;
 
-        console.log(body);
-        
-        db.collection('Inventory').updateOne(
-            { _id: new ObjectId(body._id) },
-            { $set: { type: body.type }},
-            { $set: { location: body.location }},
-            { $set: { uid: body.uid }},
-        )
-        .then((obj) => {
-            console.log('updated...');
-            res.json({
-                data: true 
-            })
-        })
-        .catch((err) => {
-            res.error('can not update');
-        })
-
-
-    } catch (e){
-        console.error(e);
-    }
-
+    db.collection('Inventory')
+      .updateOne(
+        {
+          _id: new ObjectId(body._id),
+        },
+        {
+          $set: {
+            type: body.type,
+            location: body.location,
+            uid: body.uid,
+          },
+        }
+      )
+      .then((obj) => {
+        console.log(obj);
+        console.log('updated...');
+        res.json({
+          data: true,
+        });
+      })
+      .catch((err) => {
+        res.error('can not update');
+      });
+  } catch (e) {
+    console.error(e);
+  }
 }
