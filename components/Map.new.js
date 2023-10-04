@@ -1,13 +1,23 @@
-import { Button, Text, useDisclosure } from "@chakra-ui/react";
-import axios from "axios";
-import { useEffect, useRef, useState } from "react";
-import { MapContainer, Marker, Popup, useMapEvents } from "react-leaflet";
-import { TileLayer } from "react-leaflet";
-import { useMap } from "react-leaflet";
-import { Map } from "react-leaflet-universal";
-import EditModal from "./EditModal";
-import LocationFinderDummy from "./LocationFinderDummy";
-import DeleteModal from "./DeleteModal";
+import { Button, Text, useDisclosure } from '@chakra-ui/react';
+import axios from 'axios';
+import { useEffect, useRef, useState } from 'react';
+import { MapContainer, Marker, Popup, useMapEvents } from 'react-leaflet';
+import { TileLayer } from 'react-leaflet';
+import { useMap } from 'react-leaflet';
+import { Map } from 'react-leaflet-universal';
+import EditModal from './EditModal';
+import LocationFinderDummy from './LocationFinderDummy';
+import DeleteModal from './DeleteModal';
+
+import {
+  monitorIcon,
+  routerIcon,
+  terminalIcon,
+  chromecastIcon,
+  computerIcon,
+} from './Marker.new';
+
+import L from 'leaflet';
 
 const MapLayer = () => {
   const position = [41.131, 13.31];
@@ -35,18 +45,44 @@ const MapLayer = () => {
 
   async function fetchDataPoints() {
     const query = await axios({
-      method: "GET",
-      url: "/api/inventory/all",
+      method: 'GET',
+      url: '/api/inventory/all',
     });
 
     return query.data;
   }
 
   useEffect(() => {
-    console.log("refreshing data...");
+    console.log('refreshing data...');
     fetchDataPoints().then((data) => {
       data.map((point) => {
         point.latLong = [point.exactLocation.x, point.exactLocation.y];
+
+        switch (point.type) {
+          case 'Computer':
+            point.icon = computerIcon;
+            break;
+
+          case 'Monitor':
+            point.icon = monitorIcon;
+            break;
+
+          case 'Chromecast':
+            point.icon = chromecastIcon;
+            break;
+
+          case 'Terminals':
+            point.icon = terminalIcon;
+            break;
+
+          case 'Routers':
+            point.icon = routerIcon;
+            break;
+
+          default:
+            point.icon = computerIcon;
+            break;
+        }
       });
 
       setDataPoints(data);
@@ -63,15 +99,16 @@ const MapLayer = () => {
         <MapContainer center={[0, 0]} zoom={2} scrollWheelZoom={false}>
           <TileLayer
             attribution="its offline"
-            url={"../images/SCPlant/{z}/{x}/{y}.png"}
+            url={'../images/SCPlant/{z}/{x}/{y}.png'}
             noWrap={true}
           />
 
           {dataPoints !== null &&
             dataPoints.map((point, key) => (
               <Marker
-                style={{ background: "red" }}
+                style={{ background: 'red' }}
                 key={key}
+                icon={point.icon}
                 position={point.latLong}
               >
                 <Popup>
@@ -83,23 +120,23 @@ const MapLayer = () => {
                       onEditOpen();
                     }}
                     mr="1"
-                    bgColor={"#3B3734"}
-                    textColor={"white"}
+                    bgColor={'#3B3734'}
+                    textColor={'white'}
                   >
-                    {" "}
-                    Edit{" "}
+                    {' '}
+                    Edit{' '}
                   </Button>
                   <Button
                     ml="1"
-                    bgColor={"#E60049"}
-                    textColor={"white"}
+                    bgColor={'#E60049'}
+                    textColor={'white'}
                     onClick={() => {
                       setSelectedItem(point);
                       onDeleteOpen();
                     }}
                   >
-                    {" "}
-                    Delete{" "}
+                    {' '}
+                    Delete{' '}
                   </Button>
                 </Popup>
               </Marker>

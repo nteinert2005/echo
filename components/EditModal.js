@@ -12,53 +12,53 @@ import {
   ModalOverlay,
   Select,
   Text,
-} from "@chakra-ui/react";
-import axios from "axios";
+} from '@chakra-ui/react';
+import axios from 'axios';
 
 export const TypeOptions = [
   {
-    id: "Computers",
-    key: "computers",
+    id: 'Computers',
+    key: 'computers',
     count: 0,
   },
   {
-    id: "Monitors",
-    key: "monitors",
+    id: 'Monitors',
+    key: 'monitors',
     count: 0,
   },
   {
-    id: "Apple TV",
-    key: "apple-tv",
+    id: 'Apple TV',
+    key: 'apple-tv',
     count: 0,
   },
   {
-    id: "Chromecast",
-    key: "chromecast",
+    id: 'Chromecast',
+    key: 'chromecast',
     count: 0,
   },
   {
-    id: "Switches",
-    key: "switches",
+    id: 'Switches',
+    key: 'switches',
     count: 0,
   },
   {
-    id: "Routers",
-    key: "routers",
+    id: 'Routers',
+    key: 'routers',
     count: 0,
   },
   {
-    id: "Terminals",
-    key: "terminals",
+    id: 'Terminals',
+    key: 'terminals',
     count: 0,
   },
   {
-    id: "Scanners",
-    key: "scanners",
+    id: 'Scanners',
+    key: 'scanners',
     count: 0,
   },
   {
-    id: "Unknown",
-    key: "",
+    id: 'Unknown',
+    key: '',
     count: 0,
   },
 ];
@@ -72,8 +72,8 @@ const EditModal = ({
 }) => {
   async function updateQuery(data) {
     const results = await axios({
-      url: "/api/inventory/update",
-      method: "POST",
+      url: '/api/inventory/update',
+      method: 'POST',
       data: {
         data: data,
       },
@@ -106,15 +106,15 @@ const EditModal = ({
               {TypeOptions.map((type, index) => (
                 <option
                   selected={type.id === selectedItem?.type}
-                  value={type.key}
+                  value={type.id}
                 >
-                  {" "}
-                  {type.id}{" "}
+                  {' '}
+                  {type.id}{' '}
                 </option>
               ))}
             </Select>
           </FormControl>
-          <FormControl mt={"30px"}>
+          <FormControl mt={'30px'}>
             <FormLabel> UID: </FormLabel>
             <Input
               placeholder="UID"
@@ -127,13 +127,13 @@ const EditModal = ({
               }
             />
           </FormControl>
-          <FormControl mt={"30px"}>
+          <FormControl mt={'30px'}>
             <FormLabel> Last Online: </FormLabel>
             <Text fontSize="12px"> 14 minutes ago </Text>
           </FormControl>
-          <FormControl mt={"30px"}>
+          <FormControl mt={'30px'}>
             <FormLabel> Last Scanned: </FormLabel>
-            <Text fontSize={"12px"}> nteinert - 4 days ago </Text>
+            <Text fontSize={'12px'}> nteinert - 4 days ago </Text>
           </FormControl>
         </ModalBody>
         <ModalFooter>
@@ -145,8 +145,8 @@ const EditModal = ({
             colorScheme="green"
             onClick={() => updateItem()}
           >
-            {" "}
-            Update{" "}
+            {' '}
+            Update{' '}
           </Button>
         </ModalFooter>
       </ModalContent>

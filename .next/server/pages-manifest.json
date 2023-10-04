@@ -2,8 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/api/inventory/update": "pages/api/inventory/update.js",
-  "/api/inventory/all": "pages/api/inventory/all.js",
   "/": "pages/index.js",
-  "/api/inventory/delete": "pages/api/inventory/delete.js"
+  "/api/inventory/all": "pages/api/inventory/all.js"
 }
