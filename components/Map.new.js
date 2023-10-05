@@ -111,7 +111,7 @@ const MapLayer = () => {
                 icon={point.icon}
                 position={point.latLong}
               >
-                <Popup>
+                <Popup style={{ background: 'black' }}>
                   <Text>Type: {point.type}</Text>
                   <Text>UID: {point.uid}</Text>
                   <Text>Barcode: {point.barCode} </Text>

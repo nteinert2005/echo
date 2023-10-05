@@ -1,3 +1,4 @@
+import moment from 'moment';
 import clientPromise from '../../../lib/mongodb';
 
 var ObjectId = require('mongodb').ObjectId;
@@ -20,6 +21,9 @@ export default async function handler(req, res) {
             type: body.type,
             location: body.location,
             uid: body.uid,
+            ipAddress: body.ipAddress,
+            ipAddressCheck: moment.now(),
+            barCode: body.barCode,
           },
         }
       )
