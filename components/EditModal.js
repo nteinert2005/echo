@@ -14,6 +14,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import axios from 'axios';
+import moment from 'moment';
 
 export const TypeOptions = [
   {
@@ -128,12 +129,20 @@ const EditModal = ({
             />
           </FormControl>
           <FormControl mt={'30px'}>
+            <FormLabel> Barcode: </FormLabel>
+            <Text fontSize={'12px'}> {selectedItem?.barCode} </Text>
+          </FormControl>
+          <FormControl mt={'30px'}>
             <FormLabel> Last Online: </FormLabel>
-            <Text fontSize="12px"> 14 minutes ago </Text>
+            <Text fontSize="12px">4 days ago</Text>
           </FormControl>
           <FormControl mt={'30px'}>
             <FormLabel> Last Scanned: </FormLabel>
-            <Text fontSize={'12px'}> nteinert - 4 days ago </Text>
+            <Text fontSize={'12px'}>
+              {' '}
+              {selectedItem?.updatedBy} -{' '}
+              {moment(selectedItem?.updatedLast).fromNow()}{' '}
+            </Text>
           </FormControl>
         </ModalBody>
         <ModalFooter>

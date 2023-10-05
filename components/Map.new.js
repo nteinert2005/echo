@@ -114,6 +114,7 @@ const MapLayer = () => {
                 <Popup>
                   <Text>Type: {point.type}</Text>
                   <Text>UID: {point.uid}</Text>
+                  <Text>Barcode: {point.barCode} </Text>
                   <Button
                     onClick={() => {
                       setSelectedItem(point);
